@@ -1,22 +1,26 @@
+// <FlatList
+// data={this.state.data}
+// keyExtractor={(item,index) => index.toString()}
+// renderItem={({item}) =>
+//
+// <View>
+//    <Text style={{color:'#F7941D', fontWeight:'bold'}}>ID: {item.unitID}</Text>
+//    <Text style={{color:'#F7941D'}}>Frequency: {item.frequency}</Text>
+//    <Text>Host: {item.host}</Text>
+//   </View>
+// }
+// />
 import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  FlatList, ScrollView, Dimensions
+  FlatList, ScrollView,
 } from 'react-native';
 import { Container, Header, Content, Badge, Icon } from 'native-base';
-// import { AreaChart, BarChart, LineChart, Grid, YAxis, ProgressCircle } from 'react-native-svg-charts';
+import { AreaChart, BarChart, LineChart, Grid, YAxis, ProgressCircle } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
 import { Dropdown } from 'react-native-material-dropdown';
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from 'react-native-chart-kit'
 
 export default class Voltage extends Component {
   constructor(){
@@ -28,7 +32,7 @@ export default class Voltage extends Component {
   }
   componentDidMount(){
     const data = [];
-    fetch('http://10.200.159.78:2020/normal')
+    fetch('http://10.200.71.139:2020/normal')
     .then(response => response.json())
         .then(data => {
           const freqData = [];
@@ -45,7 +49,7 @@ export default class Voltage extends Component {
   render() {
     const contentInset = { top: 20, bottom: 20 }
     const dataa = this.state.freqData
-    console.log("hi");
+    // console.log();
     let dataf = [{
       value: '10001',
     }, {
@@ -53,64 +57,55 @@ export default class Voltage extends Component {
     }, {
       value: '10003',
     }];
-    const line = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-      datasets: [
-        {
-          data: [20, 45, 28, 80, 99, 43],
-          strokeWidth: 2, // optional
-        },
-      ],
-    };
-
     return (
+      <ScrollView>
+      <View style={styles.header}>
+        <View style={styles.header1}>
+          <Text>OverView</Text>
+        </View>
+        <View style={styles.header2}>
+        <Text>OverView</Text>
 
-    <View>
-<Text>
-Bezier Line Chart
-</Text>
-<LineChart
-data={ line }
-width={Dimensions.get('window').width} // from react-native
-height={220}
-yAxisLabel={'$'}
-chartConfig={{
-backgroundColor: '#e26a00',
-backgroundGradientFrom: '#fb8c00',
-backgroundGradientTo: '#ffa726',
-decimalPlaces: 2, // optional, defaults to 2dp
-color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-style: {
-borderRadius: 16
-}
-}}
-bezier
-style={{
-marginVertical: 8,
-borderRadius: 16
-}}
-/>
-<Text>
-Bar chart
-</Text>
-<BarChart
-    // style={graphStyle}
-    data={ line }
-    width={Dimensions.get('window').width}
-    height={220}
-    yAxisLabel={'$'}
-    chartConfig={{
-    backgroundColor: '#e26a00',
-    backgroundGradientFrom: '#fb8c00',
-    backgroundGradientTo: '#ffa726',
-    decimalPlaces: 2, // optional, defaults to 2dp
-    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-    style: {
-    borderRadius: 16
-    }
-    }}
-/>
-</View>
+        </View>
+      </View>
+        <Text style={styles.buttonText}>Frequency Plots</Text>
+
+        <Dropdown
+        label='Select your unit/deviceID'
+        data={dataf}
+        />
+
+          <View style={{ height: 200, flexDirection: 'row', marginTop:20 }}>
+                <YAxis
+                    data={ dataa }
+                    contentInset={ contentInset }
+                    svg={{
+                        fill: 'grey',
+                        fontSize: 10,
+                    }}
+                    numberOfTicks={ 10 }
+                    formatLabel={ value => `${value}` }
+                />
+                <LineChart
+                    style={{ flex: 1}}
+                    data={ dataa }
+                    svg={{ stroke: 'rgb(134, 65, 244)' }}
+                    contentInset={ contentInset }
+                >
+                    <Grid/>
+                </LineChart>
+                <LineChart
+                svg={{ stroke: 'rgb(104, 95, 44)' }}
+                  style={StyleSheet.absoluteFill}
+                  data={[60, 60, 60, 60, 60, 61, 61, 60, 60, 60, 60, 61, 60, 59, 59, 59, 60, 60, 60, 60]}>
+                </LineChart>
+            </View>
+            <View>
+
+            </View>
+
+
+    </ScrollView>
     );
   }
 }

@@ -1,13 +1,55 @@
+
+//
+//     <ScrollView>
+//     <View><Text>Voltage</Text></View>
+//
+//
+//
+//           <View>
+//   <Text>Bezier Line Chart</Text>
+//   <LineChart
+//     data={ dataa }
+//     width={Dimensions.get("window").width} // from react-native
+//     height={220}
+//     yAxisLabel={"$"}
+//     chartConfig={{
+//       backgroundColor: "#e26a00",
+//       backgroundGradientFrom: "#fb8c00",
+//       backgroundGradientTo: "#ffa726",
+//       decimalPlaces: 2, // optional, defaults to 2dp
+//       color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+//       style: {
+//         borderRadius: 16
+//       }
+//     }}
+//     bezier
+//     style={{
+//       marginVertical: 8,
+//       borderRadius: 16
+//     }}
+//   />
+// </View>
+//
+//
+//                  </ScrollView>
 import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
   View,
   FlatList,
-  ScrollView, Button, Animated, AnimatedView
+  ScrollView, Button, Animated, AnimatedView, Dimensions
 } from 'react-native';
-import { AreaChart, BarChart, LineChart, Grid, YAxis, ProgressCircle, PieChart } from 'react-native-svg-charts';
+// import { AreaChart, BarChart, LineChart, Grid, YAxis, ProgressCircle, PieChart } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from "react-native-chart-kit";
 
 export default class Voltage extends Component {
 
@@ -20,12 +62,12 @@ export default class Voltage extends Component {
   //10.0.0.198:2020
   componentDidMount(){
     const data = [];
-    fetch('http://10.200.159.78:2020/normal')
+    fetch('http://10.200.71.139:2020/normal')
     .then(response => response.json())
         .then(data => {
           const voltageData = [];
           data.forEach(function (vol) {
-            voltageData.push((vol.voltage));
+            voltageData.push(parseInt(vol.voltage));
           });
           this.setState({
               data: voltageData
@@ -38,9 +80,6 @@ export default class Voltage extends Component {
     const dataa = this.state.data
     console.log(dataa); //array
     return (
-
-      <ScrollView>
-      <View><Text>Voltage</Text></View>
       <View style={{ height: 200, flexDirection: 'row' }}>
                 <YAxis
                     data={ dataa }
@@ -61,30 +100,6 @@ export default class Voltage extends Component {
                     <Grid/>
                 </LineChart>
             </View>
-
-
-            <AreaChart
-                       style={{ height: 350 }}
-                       data={ dataa }
-                       contentInset={{ top: 30, bottom: 30 }}
-                       curve={ shape.curveNatural }
-                       svg={{ fill: 'rgba(134, 65, 244, 0.8)' }}
-                   >
-                       <Grid/>
-                   </AreaChart>
-
-
-                   <LineChart
-                             style={{ height: 350 }}
-                             data= {dataa}
-                             svg={{ stroke: 'rgb(134, 65, 244)' }}
-
-                         >
-                             <Grid/>
-                         </LineChart>
-
-                   </ScrollView>
-
 
     );
   }

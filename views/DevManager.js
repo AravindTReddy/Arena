@@ -13,6 +13,7 @@ import Wifi2 from './wifi/Wifi2';
 import Wifi3 from './wifi/Wifi3';
 import Wifi4 from './wifi/Wifi4';
 import Wifi5 from './wifi/Wifi5';
+import Wifi6 from './wifi/Wifi6';
 import Wifi_test from './wifi/Wifi_test';
 import CustomHeader from "../components/CustomHeader";
 import {HeaderBackButton, createStackNavigator, createAppContainer, StackActions, NavigationActions } from 'react-navigation';
@@ -26,11 +27,12 @@ import {
 
 const RootStack = createStackNavigator({
   Wifi: Wifi,
-  Wifi1: Wifi1,
+  Wifi1:Wifi1,
   Wifi2:Wifi2,
   Wifi3:Wifi3,
   Wifi4:Wifi4,
   Wifi5:Wifi5,
+  Wifi6:Wifi6,
   Wifi_test:Wifi_test,
 },
 {

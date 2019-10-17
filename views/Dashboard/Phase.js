@@ -15,7 +15,7 @@ export default class Phase extends Component {
   }
 
   fetchData = async()=>{
-      const response = await fetch('http://10.200.159.78:2020/normal');
+      const response = await fetch('http://10.200.71.139:2020/normal');
       const times = await response.json();
       this.setState({data:times});
     }
