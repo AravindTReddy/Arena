@@ -1,37 +1,3 @@
-
-//
-//     <ScrollView>
-//     <View><Text>Voltage</Text></View>
-//
-//
-//
-//           <View>
-//   <Text>Bezier Line Chart</Text>
-//   <LineChart
-//     data={ dataa }
-//     width={Dimensions.get("window").width} // from react-native
-//     height={220}
-//     yAxisLabel={"$"}
-//     chartConfig={{
-//       backgroundColor: "#e26a00",
-//       backgroundGradientFrom: "#fb8c00",
-//       backgroundGradientTo: "#ffa726",
-//       decimalPlaces: 2, // optional, defaults to 2dp
-//       color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-//       style: {
-//         borderRadius: 16
-//       }
-//     }}
-//     bezier
-//     style={{
-//       marginVertical: 8,
-//       borderRadius: 16
-//     }}
-//   />
-// </View>
-//
-//
-//                  </ScrollView>
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -40,16 +6,19 @@ import {
   FlatList,
   ScrollView, Button, Animated, AnimatedView, Dimensions
 } from 'react-native';
-// import { AreaChart, BarChart, LineChart, Grid, YAxis, ProgressCircle, PieChart } from 'react-native-svg-charts';
+import { AreaChart, BarChart, LineChart, Grid, YAxis, ProgressCircle, PieChart } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from "react-native-chart-kit";
+import * as d3 from 'd3';
+
+// const yAxis =
+//   axisLeft(yScale)
+//     .ticks(5)
+//     .tickFormat(format(d3Config.numberFormat));
+//
+// const xAxis =
+//   axisBottom(xScale)
+//     .ticks(5)
+//     .tickFormat(timeFormat(d3Config.dateFormat));
 
 export default class Voltage extends Component {
 
@@ -60,9 +29,11 @@ export default class Voltage extends Component {
     }
   }
   //10.0.0.198:2020
+
   componentDidMount(){
+    this.interval = setInterval(() => {
     const data = [];
-    fetch('http://10.200.71.139:2020/normal')
+    fetch('http://192.168.1.7:2020/normal')
     .then(response => response.json())
         .then(data => {
           const voltageData = [];
@@ -74,6 +45,7 @@ export default class Voltage extends Component {
           });
             // console.log(this.state.data); array
         });
+        }, 1000);
   }
   render() {
     const contentInset = { top: 20, bottom: 20 }

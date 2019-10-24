@@ -3,7 +3,8 @@ import { View,Text, Image, StyleSheet, TouchableOpacity, Dimensions } from "reac
 
 const { width, height } = Dimensions.get("window");
 
-const CARD_HEIGHT = height/3 ;
+const IMG_HEIGHT = height/4 ;
+const CARD_HEIGHT = height/8 ;
 const CARD_WIDTH = width - 50;
 export default class Wifi3 extends Component {
 
@@ -32,12 +33,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: CARD_WIDTH,
     marginVertical: 10,
+    height:IMG_HEIGHT,
   },
   btn: {
-    padding:10,width:'90%',
+    padding:10,width:CARD_WIDTH,
+    height:CARD_HEIGHT-30,
     paddingVertical:12,
     backgroundColor: "#F7941D",
-    borderRadius:25,
+    borderRadius:5,
     marginVertical:10,alignItems:'center',
   },
   btnText:{

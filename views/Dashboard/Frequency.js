@@ -1,15 +1,3 @@
-// <FlatList
-// data={this.state.data}
-// keyExtractor={(item,index) => index.toString()}
-// renderItem={({item}) =>
-//
-// <View>
-//    <Text style={{color:'#F7941D', fontWeight:'bold'}}>ID: {item.unitID}</Text>
-//    <Text style={{color:'#F7941D'}}>Frequency: {item.frequency}</Text>
-//    <Text>Host: {item.host}</Text>
-//   </View>
-// }
-// />
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -32,7 +20,7 @@ export default class Voltage extends Component {
   }
   componentDidMount(){
     const data = [];
-    fetch('http://10.200.71.139:2020/normal')
+    fetch('http://192.168.1.7:2020/normal')
     .then(response => response.json())
         .then(data => {
           const freqData = [];
@@ -76,16 +64,7 @@ export default class Voltage extends Component {
         />
 
           <View style={{ height: 200, flexDirection: 'row', marginTop:20 }}>
-                <YAxis
-                    data={ dataa }
-                    contentInset={ contentInset }
-                    svg={{
-                        fill: 'grey',
-                        fontSize: 10,
-                    }}
-                    numberOfTicks={ 10 }
-                    formatLabel={ value => `${value}` }
-                />
+
                 <LineChart
                     style={{ flex: 1}}
                     data={ dataa }
@@ -160,3 +139,15 @@ const styles = StyleSheet.create({
   },
 
 });
+// <FlatList
+// data={this.state.data}
+// keyExtractor={(item,index) => index.toString()}
+// renderItem={({item}) =>
+//
+// <View>
+//    <Text style={{color:'#F7941D', fontWeight:'bold'}}>ID: {item.unitID}</Text>
+//    <Text style={{color:'#F7941D'}}>Frequency: {item.frequency}</Text>
+//    <Text>Host: {item.host}</Text>
+//   </View>
+// }
+// />

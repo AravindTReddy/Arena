@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { AppRegistry,View,Text,StyleSheet
-,Button,TouchableOpacity,StatusBar,Image } from 'react-native';
-
+,Button,TouchableOpacity,StatusBar,Image, Dimensions } from 'react-native';
+const { width, height } = Dimensions.get("window");
+const CARD_HEIGHT = height/8 ;
+const CARD_WIDTH = width - 50;
 // <View style={styles.devList}>
 // <Text style={styles.heading}>Your devices</Text>
 // </View>
@@ -24,7 +26,6 @@ export default class Wifi extends Component{
     		style={styles.btn2}>
     		<Text style={styles.btnText}>Add a Group</Text>
     		</TouchableOpacity>
-        <View style={{borderBottomColor: 'black',borderBottomWidth: 1}}/>
 
       </View>
 		);
@@ -37,26 +38,30 @@ const styles = StyleSheet.create({
     alignItems:'center',
   },
 	btn1: {
-    padding:10,margin:10,width:'80%',marginTop:50,
+    padding:10,margin:10,
+		width:CARD_WIDTH,
+    height:CARD_HEIGHT-25,
+		marginTop:50,
     paddingVertical:12,
     backgroundColor: "lightgray",
-    borderRadius:25,
+    borderRadius:5,
     marginVertical:10,
   },
 	btn2:{
 		backgroundColor:'gray',
-		padding:10,margin:10,width:'80%',
+		padding:10,margin:10,width:CARD_WIDTH,
+    height:CARD_HEIGHT-25,
 		paddingVertical:12,
-		borderRadius:25,
+		borderRadius:5,
 		marginVertical:10,
 	},
 	heading:{
 		margin:10, fontSize:20,marginTop:30,
-		color:'#000', textAlign:'center',marginBottom:30,
+		color:'#000', textAlign:'center',marginBottom:10,
 	},
 	btnText:{
 		margin:10,fontWeight:'bold',
-		color:'#000', textAlign:'center'
+		color:'#000', textAlign:'center', justifyContent:'center',
 
 	},
 	devList: {

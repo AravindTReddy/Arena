@@ -27,7 +27,7 @@ onMapLayout = () => {
   }
 
   componentDidMount(){
-    fetch('http://10.200.71.139:2020/location')
+    fetch('http://192.168.1.7:2020/location')
       .then(response => response.json())
         .then(data => {
             var elements = data.map(function(e) {

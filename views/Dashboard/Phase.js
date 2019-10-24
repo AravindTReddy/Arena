@@ -4,114 +4,94 @@ import {
   Text,
   View,
   FlatList,
+  ScrollView, Button, Animated, AnimatedView, Dimensions
 } from 'react-native';
+import { AreaChart, BarChart, LineChart, Grid, XAxis, YAxis, ProgressCircle, PieChart } from 'react-native-svg-charts';
+import * as shape from 'd3-shape';
+import * as d3 from 'd3';
 
 export default class Phase extends Component {
-  // static navigationOptions= ({navigation}) =>({
-  // 		  title: 'Welcome',
-  // 	});
-  state ={
-    data:[]
-  }
 
-  fetchData = async()=>{
-      const response = await fetch('http://10.200.71.139:2020/normal');
-      const times = await response.json();
-      this.setState({data:times});
+  constructor(){
+    super();
+    this.state = {
+      data:[],
+      voltageData:[]
     }
-componentDidMount(){
-  this.fetchData();
-}
-	render(){
-		return(
-			<View style={styles.container}>
+  }
+  //10.0.0.198:2020
 
-      <View style={styles.header}>
-        <View style={styles.header1}>
-          <Text>OverView</Text>
-        </View>
-        <View style={styles.header2}>
+  componentDidMount(){
+    this.interval = setInterval(() => {
+    const data = [];
+    fetch('http://192.168.1.7:2020/normal')
+    .then(response => response.json())
+        .then(data => {
+          const voltageData = [];
+          data.forEach(function (vol) {
+           // voltageData.push(parseInt(vol.voltage));
+          voltageData.push({
+                  x: vol.voltage,
+                  y: vol.time,
+                });
+          });
+          this.setState({
+              voltageData: voltageData,
+              data:data
+          });
+            // console.log(this.state.data); array
+        });
+      }, 10000);
+  }
+  render() {
+    const axesSvg = { fontSize: 10, fill: 'grey' };
+    const verticalContentInset = { top: 20, bottom: 20 }
+    const xAxisHeight = 30
+    const voldata = this.state.voltageData
+    const data = this.state.data
+    console.log(data);
+    console.log(voldata); //array
+    return (
+      <View style={{ height: 200, padding: 20, flexDirection: 'row' }}>
+         <YAxis
+             data={voldata}
+             style={{ marginBottom: xAxisHeight }}
+             contentInset={verticalContentInset}
+             svg={axesSvg}
+         />
+         <View style={{ flex: 1, marginLeft: 10 }}>
+             <LineChart
+                 style={{ flex: 1 }}
+                 data={voldata}
+                 contentInset={verticalContentInset}
+                 svg={{ stroke: 'rgb(134, 65, 244)' }}
+             >
+                 <Grid/>
+             </LineChart>
+             <XAxis
+                 style={{ marginHorizontal: 10, height: xAxisHeight }}
+                 data={data}
 
-          <FlatList
-          data={this.state.data}
-          keyExtractor={(item,index) => index.toString()}
-          renderItem={({item}) =>
-
-          <View>
-             <Text style={{color:'#F7941D', fontWeight:'bold'}}>ID: {item.unitID}</Text>
-             <Text style={{color:'#F7941D'}}>Phase Angle: {item.frequency}</Text>
-             <Text>Host: {item.host}</Text>
-            </View>
-          }
-
-          />
-        </View>
-      </View>
-
-       <Text style={styles.buttonText}>Phase Data</Text>
-       <FlatList
-       data={this.state.data}
-       keyExtractor={(item,index) => index.toString()}
-       renderItem={({item}) =>
-
-       <View style={{backgroundColor:'#F7941D',padding:50,margin:10,borderRadius:10}}>
-          <Text style={{color:'#fff', fontWeight:'bold'}}>ID: {item.unitID}</Text>
-
-          <Text>Host: {item.host}</Text>
+                 contentInset={{ left: 10, right: 10 }}
+                 svg={axesSvg}
+             />
          </View>
-       }
-       />
-  		</View>
+     </View>
+
     );
-	}
+  }
 }
 
 const styles = StyleSheet.create({
   container : {
-    flexGrow: 1,
-    justifyContent:'center',
-    alignItems: 'center'
+    flex: 1,
   },
   buttonText: {
     fontSize:16,
     fontWeight:'500',
     color:'black',
-    textAlign:'center'
-  },
-  header: {
-    backgroundColor: '#ffffff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    paddingTop:20,
-  },
-  header1: {
-    borderRadius: 4,
-    borderWidth: 0.5,
-    borderColor: '#E5E5E5',
-    height: 100,
-    flexDirection: 'row',
-    backgroundColor: '#f2f2f2',
-    alignItems: 'center',
-    width: 170,
-    marginTop: 10, marginBottom:10,
-    marginRight: 10, marginLeft:10,
-    justifyContent: 'center',
-    elevation: 2,
-  },
-  header2: {
-    borderRadius: 4,
-    borderWidth: 0.5,
-    borderColor: '#E5E5E5',
-    height: 100,
-    flexDirection: 'row',
-    backgroundColor: '#f2f2f2',
-    alignItems: 'center',
-    width: 170,
-    marginTop: 10, marginBottom:10,
-    marginRight: 10,
-    justifyContent: 'center',
-    elevation: 2,
-  },
+    textAlign:'center',
+    fontWeight: 'bold'
+  }
 
 });

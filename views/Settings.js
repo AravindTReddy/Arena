@@ -13,8 +13,8 @@ export default class Settings extends Component {
     return (
       <View style={styles.container}>
       <CustomHeader navigation={this.props.navigation} />
-      <Text style={styles.titleText}>Reset your password</Text>
       <View style={styles.body}>
+      <Text style={styles.titleText}>Reset your password</Text>
         <TextInput style={styles.inputBox}
           underlineColorAndroid='rgba(0,0,0,0)'
           placeholder="Current Password"
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     justifyContent :'center'
   },
   titleText:{
+    marginVertical:10,
     fontSize:16,
   	fontWeight:'500',
     paddingBottom:10,

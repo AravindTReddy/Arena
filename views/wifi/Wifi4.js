@@ -9,13 +9,14 @@ import {
   FlatList
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-const { width, height } = Dimensions.get("window");
 import wifi from 'react-native-android-wifi';
 
-const CARD_HEIGHT = height/10 ;
+const { width, height } = Dimensions.get("window");
+const CARD_HEIGHT = height/8 ;
 const CARD_WIDTH = width - 50;
+
 type Props = {};
+
 export default class Wifi4 extends Component {
   constructor(props){
     super(props);
@@ -60,7 +61,6 @@ export default class Wifi4 extends Component {
         var wifiArray = JSON.parse(wifiStringList);
         this.setState({
           wifiList:wifiArray,
-
         });
       },
       (error) => {
@@ -114,9 +114,9 @@ export default class Wifi4 extends Component {
 const styles = StyleSheet.create({
   btn: {
     marginTop:10,width:CARD_WIDTH,
-    height:CARD_HEIGHT,
+    height:CARD_HEIGHT-30,
     backgroundColor: "#F7941D",
-    borderRadius:25,
+    borderRadius:5,
     marginVertical:10,alignItems:'center',
     justifyContent:'center',
   },
