@@ -20,7 +20,7 @@ export default class Voltage extends Component {
   }
   componentDidMount(){
     const data = [];
-    fetch('http://192.168.1.7:2020/normal')
+    fetch('http://10.200.145.233:2020/normal')
     .then(response => response.json())
         .then(data => {
           const freqData = [];

@@ -27,7 +27,7 @@ onMapLayout = () => {
   }
 
   componentDidMount(){
-    fetch('http://192.168.1.7:2020/location')
+    fetch('http://ec2-18-204-252-137.compute-1.amazonaws.com:3009/location')
       .then(response => response.json())
         .then(data => {
             var elements = data.map(function(e) {
@@ -36,7 +36,7 @@ onMapLayout = () => {
                   latitude: e.latitude,
                   longitude: e.longitude
               },
-              title: e.host,
+              title: e.unitID,
               description: e.topic
             }
            });
