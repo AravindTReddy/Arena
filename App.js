@@ -6,12 +6,13 @@
  */
 
 //import Routes from './Routes';
-import Login from "./pages/Login";
-import Signup from './pages/Signup';
-import Home from './pages/Home';
+import SignIn from "./pages/SignIn";
+import SignUp from './pages/SignUp';
+import Hello from './pages/Hello';
 import Main from './pages/Main';
-
-
+import Settings from './views/Settings'
+import ConfirmSignUp from './pages/ConfirmSignUp';
+import ForgetPassword from './pages/ForgetPassword';
 import { createStackNavigator, createAppContainer, StackActions, NavigationActions } from 'react-navigation';
 import React, {Fragment} from 'react';
 import {
@@ -21,17 +22,24 @@ import {
   StatusBar,
 } from 'react-native';
 
+import Amplify from '@aws-amplify/core'
+import config from './aws-exports'
+Amplify.configure(config)
+
 const RootStack = createStackNavigator({
-  Login: Login,
-  Signup: Signup,
-  Home: Home,
+  Hello: Hello,
+  SignIn: SignIn,
+  SignUp: SignUp,
+  ConfirmSignUp: ConfirmSignUp,
+  ForgetPassword: ForgetPassword,
   Main: Main,
+  Settings:Settings
 },
 {
   defaultNavigationOptions: {
        header: null
      },
-    initialRouteName: 'Home'
+    initialRouteName: 'Hello'
 });
 
 const AppContainer = createAppContainer(RootStack);

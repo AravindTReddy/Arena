@@ -14,7 +14,7 @@ export default class Wifi extends Component{
 		return(
       <View style={styles.container}>
       <Text style={styles.heading}>Add your devices here</Text>
-      <View style={{borderBottomColor: 'black',borderBottomWidth: 1}}/>
+
     		<TouchableOpacity
     		onPress={() => navigate('Wifi1')}
     		style={styles.btn1}>
@@ -57,11 +57,11 @@ const styles = StyleSheet.create({
 	},
 	heading:{
 		margin:10, fontSize:20,marginTop:30,
-		color:'#000', textAlign:'center',marginBottom:10,
+		color:'#000', textAlign:'center',marginBottom:10,alignItems:'center',
 	},
 	btnText:{
 		margin:10,fontWeight:'bold',
-		color:'#000', textAlign:'center', justifyContent:'center',
+		color:'#000', textAlign:'center', alignItems:'center',
 
 	},
 	devList: {

@@ -134,7 +134,7 @@ android {
         applicationId "com.brixonapplication"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        versionCode 2
         versionName "1.0"
     }
     splits {
@@ -203,7 +203,6 @@ android {
 
 dependencies {
     implementation project(':react-native-android-wifi')
-    implementation project(':@react-native-community_netinfo')
     implementation project(':react-native-maps')
     implementation project(':react-native-svg')
     implementation project(':react-native-vector-icons')

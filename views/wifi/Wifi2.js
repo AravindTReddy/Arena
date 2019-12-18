@@ -3,7 +3,7 @@ import { View,Text, Image, StyleSheet, TouchableOpacity, Dimensions } from "reac
 
 const { width, height } = Dimensions.get("window");
 
-const IMG_HEIGHT = height/4 ;
+const IMG_HEIGHT = height/3 ;
 const CARD_HEIGHT = height/8 ;
 const CARD_WIDTH = width - 50;
 
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     width: CARD_WIDTH,
     marginVertical: 10,
     borderRadius:10,
-    height:IMG_HEIGHT,
+    height:IMG_HEIGHT-20,
   },
   btn: {
     padding:10,marginTop:40,
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   btnText:{
 		margin:10,
-		color:'#000', textAlign:'center'
+		color:'#000', textAlign:'center',alignItems:'center',
 	},
   heading:{
     margin:10, fontSize:20,

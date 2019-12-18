@@ -37,7 +37,7 @@ const RootStack = createStackNavigator({
 },
 {
   defaultNavigationOptions: {
-       headerTitle: 'Device Manager'
+       headerTitle: 'Device Manager',
      },
     initialRouteName: 'Wifi'
 });

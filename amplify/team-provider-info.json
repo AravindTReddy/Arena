@@ -1,0 +1,20 @@
+{
+    "signin": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-brixonapp-signin-105632-authRole",
+            "UnauthRoleArn": "arn:aws:iam::354676929075:role/amplify-brixonapp-signin-105632-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::354676929075:role/amplify-brixonapp-signin-105632-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "amplify-brixonapp-signin-105632-deployment",
+            "UnauthRoleName": "amplify-brixonapp-signin-105632-unauthRole",
+            "StackName": "amplify-brixonapp-signin-105632",
+            "StackId": "arn:aws:cloudformation:us-east-2:354676929075:stack/amplify-brixonapp-signin-105632/f7ea9ff0-1cf7-11ea-9ed0-065ddb117676",
+            "AmplifyAppId": "d3rhtk4lv8qxxd"
+        },
+        "categories": {
+            "auth": {
+                "brixonapp893d8ef7": {}
+            }
+        }
+    }
+}

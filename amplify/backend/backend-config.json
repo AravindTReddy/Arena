@@ -1,0 +1,9 @@
+{
+	"auth": {
+		"brixonapp893d8ef7": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	}
+}

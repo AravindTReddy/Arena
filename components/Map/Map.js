@@ -30,14 +30,14 @@ onMapLayout = () => {
     fetch('http://ec2-18-204-252-137.compute-1.amazonaws.com:3009/location')
       .then(response => response.json())
         .then(data => {
-            var elements = data.map(function(e) {
+            var elements = data.filter(e => !!e.latitude && !!e.longitude).map(function(e) {
               return {
-              coordinate: {
-                  latitude: e.latitude,
-                  longitude: e.longitude
-              },
-              title: e.unitID,
-              description: e.topic
+                coordinate: {
+                    latitude: e.latitude,
+                    longitude: e.longitude
+                },
+                title: e.unitID,
+                description: e.topic
             }
            });
             this.setState({
@@ -45,7 +45,6 @@ onMapLayout = () => {
               data:data
             });
           });
-          console.log(this.state.markers);
           this.index = 0;
           this.animation = new Animated.Value(0);
       // We should detect when scrolling has stopped then animate
@@ -64,6 +63,7 @@ onMapLayout = () => {
           if (this.index !== index) {
             this.index = index;
             const { coordinate } = this.state.markers[index];
+            // console.log(coordinate);
             this.map.animateToRegion(
               {
                 ...coordinate,
@@ -78,6 +78,7 @@ onMapLayout = () => {
   }
 
   render(){
+    console.log(this.state.markers);
     const interpolations = this.state.markers.map((marker, index) => {
       const inputRange = [
         (index - 1) * CARD_WIDTH,

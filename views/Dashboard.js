@@ -10,7 +10,6 @@ export default class Dashboard extends Component {
     return (
       <View style={{ flex: 1 }}>
         <CustomHeader navigation={this.props.navigation} />
-
         <CustomTabNavigator navigation={this.props.navigation} />
       </View>
     );

@@ -22,9 +22,9 @@ const CustomHeader = ({ navigation }) => (
       </View>
       <View style={styles.rightNav}>
         <TouchableOpacity onPress={() => {
-          alert("logout here")
+          alert("notifications here")
         }}>
-        <Icon style={styles.navItem} name="power-off" size={30} color="#F7941D" />
+        <Icon style={styles.navItem} name="bell" size={30} color="#F7941D" />
         </TouchableOpacity>
       </View>
     </View>
